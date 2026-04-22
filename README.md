@@ -17,7 +17,7 @@ El objetivo principal fue implementar una solución funcional que permita operar
 ---
 
 ## Objetivos del Sprint 1
-En esta etapa se trabajó sobre la base del sistema:
+Desarrollar un sistema de gestión de inventario que permita administrar productos y actualizar precios en función de la cotización del dólar. En esta etapa se trabajó sobre la base del sistema:
 
 - Definición del modelo de dominio
 - Implementación de persistencia en archivos CSV
@@ -26,6 +26,9 @@ En esta etapa se trabajó sobre la base del sistema:
 - Implementación de operaciones CRUD sobre todas las entidades
 - Manejo de stock con validaciones
 - Registro de cotizaciones con histórico
+
+Introducción y contexto
+Este proyecto surge de la necesidad de una empresa de productos electrónicos de gestionar su inventario en un entorno económico cambiante. Se desarrollará una aplicación en Python basada en programación orientada a objetos que permitirá administrar productos, categorías, proveedores, precios y stock, considerando distintas monedas y cotizaciones del dólar.
 
 ---
 
