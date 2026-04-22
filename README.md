@@ -1,7 +1,7 @@
 # Price Manager System - Sprint 1
 
 ## Información Académica
-- **Alumnos:** Adrián Agata, Fernanda Quiroga, Monserrat Gutierrez, Nelson Solano, Ricardo....
+- **Alumnos:** Adrián Agata, Fernanda Quiroga, Monserrat Gutierrez, Nelson Solano, Ricardo Gieco
 - **Materia:** Seminario de Actualización
 - **Profesores:** Gabriel Orlando Gosparo, Fabricio Pasinato
 - **Universidad:** Universidad del Gran Rosario
