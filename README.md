@@ -122,5 +122,5 @@ Configurar el entorno para que Python reconozca la carpeta `src` y luego ejecuta
 
 ```bash
 set PYTHONPATH=src
-python -m price_manager.main
+python -c "from price_manager.main import main; main(import_default_data=True)"
 ```
