@@ -96,7 +96,21 @@ price_manager/
 
 ## Decisiones de Diseño
 
+- Se utilizó **CSV como mecanismo de persistencia** por simplicidad y para cumplir con la consigna.
+- Se implementó una **clase base (`EntidadBase`)** para evitar duplicación de código.
+- Se utilizó **inyección de dependencias** para desacoplar componentes.
+- Se aplicaron validaciones como:
+  - No permitir precios negativos
+  - No permitir stock negativo
+  - Validar existencia de relaciones (producto, proveedor, etc.)
+
 ---
 
 ## Cómo ejecutar el sistema
 
+1. Configurar el entorno para que Python reconozca la carpeta `src`
+2. Ejecutar:
+
+```bash
+python main.py
+```
