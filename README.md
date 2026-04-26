@@ -106,6 +106,17 @@ price_manager/
 
 ---
 
+## Cómo clonar el repo
+
+```bash
+git config --global user.name "<usuario de github>"
+git config --global user.email "<correo del usuario>"
+git init
+git clone -b main https://github.com/adrianagata011/price_manager.git
+```
+
+---
+
 ## Cómo ejecutar el sistema
 
 1. Configurar el entorno para que Python reconozca la carpeta `src`
