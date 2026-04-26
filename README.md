@@ -118,11 +118,9 @@ git clone -b main https://github.com/adrianagata011/price_manager.git
 
 ## Cómo ejecutar el sistema
 
-1. Configurar el entorno para que Python reconozca la carpeta `src`
-2. Ejecutar:
+Configurar el entorno para que Python reconozca la carpeta `src` y luego ejecutar
 
 ```bash
-cd src
-PYTHONPATH=src
-python main.py
+set PYTHONPATH=src
+python -m price_manager.main
 ```
