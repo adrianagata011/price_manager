@@ -24,6 +24,12 @@
 - Implementación repositorios y carga de datos
 - Implementación servicios principales
 - Implementación del UI
+- Creación del archivo requirements.txt
 
 ---
 
+#### 26/04/2026
+
+- Implementación del flujo principal de ejecución
+- Actualización de la documentación y CHANGELOG.md FINAL
+- Ejecución de los tests unitarios
