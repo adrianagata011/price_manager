@@ -111,7 +111,6 @@ price_manager/
 ```bash
 git config --global user.name "<usuario de github>"
 git config --global user.email "<correo del usuario>"
-git init
 git clone -b main https://github.com/adrianagata011/price_manager.git
 ```
 
@@ -123,5 +122,7 @@ git clone -b main https://github.com/adrianagata011/price_manager.git
 2. Ejecutar:
 
 ```bash
+cd src
+PYTHONPATH=src
 python main.py
 ```
