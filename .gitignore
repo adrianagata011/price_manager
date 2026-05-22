@@ -1,3 +1,5 @@
+price_manager.db
+src/price_manager.db
+
 __pycache__/
 *.pyc
-.ipynb_checkpoints/

@@ -1,0 +1,10 @@
+INSERT INTO monedas (id, nombre, codigo) VALUES ('1', 'Peso Argentino', 'ARS');
+INSERT INTO monedas (id, nombre, codigo) VALUES ('2', 'Dolar Estadounidense', 'USD');
+INSERT INTO monedas (id, nombre, codigo) VALUES ('3', 'Euro', 'EUR');
+INSERT INTO monedas (id, nombre, codigo) VALUES ('4', 'Real Brasileño', 'BRL');
+INSERT INTO monedas (id, nombre, codigo) VALUES ('5', 'Peso Uruguayo', 'UYU');
+INSERT INTO monedas (id, nombre, codigo) VALUES ('6', 'Peso Chileno', 'CLP');
+INSERT INTO monedas (id, nombre, codigo) VALUES ('7', 'Guarani', 'PYG');
+INSERT INTO monedas (id, nombre, codigo) VALUES ('8', 'Sol Peruano', 'PEN');
+INSERT INTO monedas (id, nombre, codigo) VALUES ('9', 'Peso Mexicano', 'MXN');
+INSERT INTO monedas (id, nombre, codigo) VALUES ('10', 'Libra Esterlina', 'GBP');

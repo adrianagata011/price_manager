@@ -1,0 +1,10 @@
+INSERT INTO almacenes (id, nombre, ubicacion) VALUES ('1', 'Deposito Central', 'CABA');
+INSERT INTO almacenes (id, nombre, ubicacion) VALUES ('2', 'Sucursal Norte', 'San Isidro');
+INSERT INTO almacenes (id, nombre, ubicacion) VALUES ('3', 'Sucursal Sur', 'Avellaneda');
+INSERT INTO almacenes (id, nombre, ubicacion) VALUES ('4', 'Sucursal Oeste', 'Ramos Mejia');
+INSERT INTO almacenes (id, nombre, ubicacion) VALUES ('5', 'Sucursal La Plata', 'La Plata');
+INSERT INTO almacenes (id, nombre, ubicacion) VALUES ('6', 'Sucursal Rosario', 'Rosario');
+INSERT INTO almacenes (id, nombre, ubicacion) VALUES ('7', 'Sucursal Cordoba', 'Cordoba');
+INSERT INTO almacenes (id, nombre, ubicacion) VALUES ('8', 'Sucursal Mendoza', 'Mendoza');
+INSERT INTO almacenes (id, nombre, ubicacion) VALUES ('9', 'Sucursal Mar del Plata', 'Mar del Plata');
+INSERT INTO almacenes (id, nombre, ubicacion) VALUES ('10', 'Sucursal Tucuman', 'Tucuman');

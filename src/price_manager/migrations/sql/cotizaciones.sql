@@ -1,0 +1,10 @@
+INSERT INTO cotizaciones (id, valor, fecha, tipo_id) VALUES ('1', '950.00', '2026-04-01', '1');
+INSERT INTO cotizaciones (id, valor, fecha, tipo_id) VALUES ('2', '1080.00', '2026-04-01', '2');
+INSERT INTO cotizaciones (id, valor, fecha, tipo_id) VALUES ('3', '1235.00', '2026-04-01', '3');
+INSERT INTO cotizaciones (id, valor, fecha, tipo_id) VALUES ('4', '1095.00', '2026-04-02', '4');
+INSERT INTO cotizaciones (id, valor, fecha, tipo_id) VALUES ('5', '1102.00', '2026-04-02', '5');
+INSERT INTO cotizaciones (id, valor, fecha, tipo_id) VALUES ('6', '940.00', '2026-04-02', '6');
+INSERT INTO cotizaciones (id, valor, fecha, tipo_id) VALUES ('7', '970.00', '2026-04-03', '7');
+INSERT INTO cotizaciones (id, valor, fecha, tipo_id) VALUES ('8', '1240.00', '2026-04-03', '8');
+INSERT INTO cotizaciones (id, valor, fecha, tipo_id) VALUES ('9', '980.00', '2026-04-03', '9');
+INSERT INTO cotizaciones (id, valor, fecha, tipo_id) VALUES ('10', '1000.00', '2026-04-03', '10');

@@ -1,0 +1,10 @@
+INSERT INTO categorias (id, nombre) VALUES ('1', 'Procesadores');
+INSERT INTO categorias (id, nombre) VALUES ('2', 'Memorias RAM');
+INSERT INTO categorias (id, nombre) VALUES ('3', 'Almacenamiento');
+INSERT INTO categorias (id, nombre) VALUES ('4', 'Placas de Video');
+INSERT INTO categorias (id, nombre) VALUES ('5', 'Fuentes');
+INSERT INTO categorias (id, nombre) VALUES ('6', 'Gabinetes');
+INSERT INTO categorias (id, nombre) VALUES ('7', 'Monitores');
+INSERT INTO categorias (id, nombre) VALUES ('8', 'Teclados');
+INSERT INTO categorias (id, nombre) VALUES ('9', 'Mouses');
+INSERT INTO categorias (id, nombre) VALUES ('10', 'Audio');

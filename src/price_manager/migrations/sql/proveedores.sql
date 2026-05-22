@@ -1,0 +1,10 @@
+INSERT INTO proveedores (id, nombre, contacto) VALUES ('1', 'TechDistribuidora', 'ventas@tech.com');
+INSERT INTO proveedores (id, nombre, contacto) VALUES ('2', 'GlobalHardware', 'info@global.com');
+INSERT INTO proveedores (id, nombre, contacto) VALUES ('3', 'StarImport', 'contacto@star.com.ar');
+INSERT INTO proveedores (id, nombre, contacto) VALUES ('4', 'MegaComponentes', 'ventas@mega.com');
+INSERT INTO proveedores (id, nombre, contacto) VALUES ('5', 'PCParts', 'pcparts@proveedor.com');
+INSERT INTO proveedores (id, nombre, contacto) VALUES ('6', 'LogiWholesale', 'ventas@logi.com');
+INSERT INTO proveedores (id, nombre, contacto) VALUES ('7', 'SiliconValleySA', 'info@silicon.com');
+INSERT INTO proveedores (id, nombre, contacto) VALUES ('8', 'DataSupply', 'ventas@datasupply.com');
+INSERT INTO proveedores (id, nombre, contacto) VALUES ('9', 'NanoTech', 'contacto@nanotech.com');
+INSERT INTO proveedores (id, nombre, contacto) VALUES ('10', 'HardWorld', 'ventas@hardworld.com');

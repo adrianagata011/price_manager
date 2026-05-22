@@ -1,0 +1,10 @@
+INSERT INTO stock (producto_id, almacen_id, cantidad) VALUES ('1', '1', '15');
+INSERT INTO stock (producto_id, almacen_id, cantidad) VALUES ('2', '1', '10');
+INSERT INTO stock (producto_id, almacen_id, cantidad) VALUES ('3', '2', '20');
+INSERT INTO stock (producto_id, almacen_id, cantidad) VALUES ('4', '2', '18');
+INSERT INTO stock (producto_id, almacen_id, cantidad) VALUES ('5', '3', '8');
+INSERT INTO stock (producto_id, almacen_id, cantidad) VALUES ('6', '3', '12');
+INSERT INTO stock (producto_id, almacen_id, cantidad) VALUES ('7', '4', '9');
+INSERT INTO stock (producto_id, almacen_id, cantidad) VALUES ('8', '4', '11');
+INSERT INTO stock (producto_id, almacen_id, cantidad) VALUES ('9', '5', '25');
+INSERT INTO stock (producto_id, almacen_id, cantidad) VALUES ('10', '5', '30');
