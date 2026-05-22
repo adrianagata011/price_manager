@@ -40,3 +40,13 @@
 - Se generaron sentencias SQL de inserción.
 - Se almacenaron archivos .sql dentro de migrations/sql.
 - Se verificó la migración de datos hacia SQLite.
+
+
+## [2026-05-21 23:27] - Ejercicio 06
+
+### Integración de repositorios con SQLite
+- Se refactorizaron los repositorios del sistema para utilizar SQLite mediante SQLAlchemy.
+- Se implementaron operaciones CRUD utilizando modelos ORM.
+- Se incorporó manejo transaccional mediante ConexionDB.
+- Se agregaron conversiones entre modelos ORM y entidades del dominio.
+- Se verificó la lectura de datos persistidos desde la base relacional.
