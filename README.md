@@ -1,9 +1,20 @@
 # Price Manager System - Sprint 2
 
+## Información Académica
+
+- **Grupo:** Grupo 2
+- **Materia:** Seminario de Actualización
+- **Profesores:** Gabriel Orlando Gosparo, Fabricio Pasinato
+- **Universidad:** Universidad del Gran Rosario
+
+---
+
 ## Objetivo
 
 Ampliar el sistema Price Manager para que la información del proyecto
 se persista en una base de datos relacional utilizando SQLAlchemy.
+
+---
 
 ## Introducción y contexto
 
@@ -17,7 +28,42 @@ tablas relacionales. Además, se agregó integración con una API externa para
 obtener cotizaciones del dólar y nuevas opciones de menú para consultar y
 exportar precios bimonetarios.
 
-## Funcionalidades principales
+---
+
+## Arquitectura del Sistema
+
+El sistema mantiene una arquitectura organizada en capas:
+
+[ UI - Console ]
+↓
+[ Servicios ]
+↓
+[ Repositorios ]
+↓
+[ SQLite + SQLAlchemy ]
+↑
+[ Entidades / ORM ]
+
+### Descripción de capas
+
+- **Entidades**
+  Representan el dominio principal del sistema.
+
+- **Modelos ORM**
+  Permiten mapear entidades hacia tablas relacionales.
+
+- **Repositorios**
+  Gestionan operaciones CRUD utilizando SQLAlchemy.
+
+- **Servicios**
+  Implementan lógica de negocio y validaciones.
+
+- **UI**
+  Interfaz por consola para operar el sistema.
+
+---
+
+## Principales funcionalidades
 
 - Conexión a base de datos mediante SQLAlchemy.
 - Manejo de sesiones y transacciones.
@@ -27,7 +73,20 @@ exportar precios bimonetarios.
 - Repositorios adaptados para trabajar con base de datos.
 - Integración con API externa de cotizaciones.
 - Uso de archivo .env para configuración.
-- Nuevas opciones de menú para cotizaciones y precios bimonetarios.
+- Exportación de precios bimonetarios.
+- Visualización de precios en múltiples monedas.
+
+---
+
+## Decisiones de diseño
+
+- Se utilizó SQLite por simplicidad y portabilidad.
+- Se mantuvo la separación por capas del Sprint 1.
+- Se utilizó SQLAlchemy ORM para desacoplar persistencia.
+- Se mantuvieron entidades separadas de modelos ORM.
+- Se integró una API pública para obtener cotizaciones reales.
+
+---
 
 ## Estructura principal
 
@@ -43,11 +102,21 @@ price_manager/
 ├── ui/
 └── main.py
 
-## Ejecución
+---
+
+## Cómo clonar el repositorio
+
+git clone -b Sprint_2 https://github.com/adrianagata011/price_manager.git
+
+---
+
+## Cómo ejecutar el sistema
 
 from price_manager.main import main
 
 main(import_default_data=False)
+
+---
 
 ## Sprint actual
 
