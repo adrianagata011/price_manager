@@ -6,6 +6,10 @@
 # La idea es que los servicios actúen como intermediarios entre
 # la interfaz y los repositorios, validando reglas antes de persistir datos.
 
+import os
+from datetime import datetime
+import requests
+from dotenv import load_dotenv
 from price_manager.entities.entities import (
     Categoria,
     Proveedor,
@@ -29,6 +33,13 @@ from price_manager.repositories.repositories import (
 )
 
 
+
+load_dotenv(
+    "/content/price_manager/.env"
+)
+API_URL = os.getenv(
+    "API_URL"
+)
 # =========================================
 # SERVICIO CATEGORIA
 # =========================================
@@ -308,3 +319,99 @@ class ServicioCotizacionDolar:
             raise ValueError(f"El tipo de cotización con ID {tipo_id} no existe.")
 
         return self._repo.leer_historico_por_tipo(tipo_id)
+
+    def obtener_cotizaciones(self):
+        """
+        Consulta la API del dólar y registra
+        las cotizaciones obtenidas en la base de datos.
+        """
+
+        if not API_URL:
+            raise ValueError(
+                "No se encontró API_URL en el archivo .env."
+            )
+
+        response = requests.get(
+            API_URL,
+            timeout=10
+        )
+
+        response.raise_for_status()
+
+        cotizaciones_api = response.json()
+        tipos_actuales = self._srv_tipo.listar_todos()
+        resultados = []
+
+        for item in cotizaciones_api:
+
+            nombre_tipo = item.get(
+                "nombre",
+                ""
+            )
+
+            valor_venta = item.get(
+                "venta"
+            )
+
+            fecha_api = item.get(
+                "fechaActualizacion"
+            )
+
+            if not nombre_tipo or valor_venta is None:
+                continue
+
+            tipo_encontrado = next(
+                (
+                    tipo for tipo in tipos_actuales
+                    if tipo.nombre.lower()
+                    == nombre_tipo.lower()
+                ),
+                None
+            )
+
+            if not tipo_encontrado:
+
+                nuevo_id = (
+                    max(
+                        [tipo.id for tipo in tipos_actuales],
+                        default=0
+                    )
+                    + 1
+                )
+
+                tipo_encontrado = TipoCotizacion(
+                    nuevo_id,
+                    nombre_tipo
+                )
+
+                self._srv_tipo.crear(
+                    tipo_encontrado
+                )
+
+                tipos_actuales.append(
+                    tipo_encontrado
+                )
+
+            fecha = datetime.fromisoformat(
+                fecha_api.replace(
+                    "Z",
+                    "+00:00"
+                )
+            ).date()
+
+            cotizacion = CotizacionDolar(
+                valor=float(valor_venta),
+                fecha=fecha,
+                tipo=tipo_encontrado
+            )
+
+            self._repo.crear(
+                cotizacion
+            )
+
+            resultados.append(
+                cotizacion
+            )
+
+        return resultados
+

@@ -50,3 +50,14 @@
 - Se incorporó manejo transaccional mediante ConexionDB.
 - Se agregaron conversiones entre modelos ORM y entidades del dominio.
 - Se verificó la lectura de datos persistidos desde la base relacional.
+
+
+## [2026-05-23 00:18] - Ejercicio 07
+
+### API del dólar y dotenv
+- Se creó el archivo .env para configuración externa de la API.
+- Se incorporó soporte para python-dotenv.
+- Se integró la API pública de cotizaciones del dólar.
+- Se implementó el método obtener_cotizaciones().
+- Se registraron cotizaciones automáticamente en SQLite.
+- Se verificó la descarga y persistencia de cotizaciones.
