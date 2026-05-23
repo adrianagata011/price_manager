@@ -10,7 +10,9 @@ from price_manager.entities.entities import (
     Categoria, Proveedor, Almacen, Moneda,
     TipoCotizacion, CotizacionDolar, Producto, Precio
 )
+import csv
 import datetime
+from pathlib import Path
 
 
 class ConsoleUI:
@@ -61,6 +63,9 @@ class ConsoleUI:
         print("28. Modificar cotización")
         print("29. Eliminar cotización")
         print("30. Ver histórico cotizaciones")
+        print("31. Obtener cotizaciones por API")
+        print("32. Ver lista de precios bimonetaria")
+        print("33. Exportar precios bimonetarios a CSV")
         print("0. Salir")
 
         return input("Seleccione una opción: ")
@@ -103,6 +108,9 @@ class ConsoleUI:
                 elif opcion == "28": self.modificar_cotizacion()
                 elif opcion == "29": self.eliminar_cotizacion()
                 elif opcion == "30": self.historico_cotizaciones()
+                elif opcion == "31": self.obtener_cotizaciones_api()
+                elif opcion == "32": self.ver_lista_precios_bimonetaria()
+                elif opcion == "33": self.exportar_precios_bimonetarios_csv()
                 elif opcion == "0":
                     print("Saliendo...")
                     break
@@ -305,3 +313,132 @@ class ConsoleUI:
     def historico_cotizaciones(self):
         for c in self.srv_cot.obtener_historico(int(input("ID tipo: "))):
             print(c.id, c.valor, c.fecha)
+
+    def obtener_cotizaciones_api(self):
+        """Obtiene cotizaciones desde la API y las registra."""
+
+        cotizaciones = self.srv_cot.obtener_cotizaciones()
+
+        print(
+            f"Cotizaciones registradas desde API: {len(cotizaciones)}"
+        )
+
+    def ver_lista_precios_bimonetaria(self):
+        """Muestra precios en pesos y en otra moneda seleccionada."""
+
+        productos = self.srv_prod.listar_todos()
+        monedas = self.srv_mon.listar_todos()
+
+        print("Monedas disponibles:")
+
+        for moneda in monedas:
+            print(moneda.id, moneda.nombre, moneda.codigo)
+
+        moneda_id = int(
+            input("Seleccione ID de moneda destino: ")
+        )
+
+        moneda_destino = self.srv_mon.obtener(
+            moneda_id
+        )
+
+        cotizaciones = self.srv_cot.listar_todos()
+
+        cotizacion = next(
+            (
+                c for c in reversed(cotizaciones)
+                if c.tipo.nombre.lower()
+                == moneda_destino.nombre.lower()
+            ),
+            None
+        )
+
+        if not cotizacion:
+            raise ValueError(
+                "No existe cotización disponible para la moneda seleccionada."
+            )
+
+        print("\n=== LISTA DE PRECIOS BIMONETARIA ===")
+
+        for producto in productos:
+
+            precio_pesos = producto.precio.valor
+            precio_convertido = precio_pesos / cotizacion.valor
+
+            print(
+                f"{producto.id} - {producto.nombre} | "
+                f"ARS {precio_pesos:.2f} | "
+                f"{moneda_destino.codigo} {precio_convertido:.2f}"
+            )
+
+    def exportar_precios_bimonetarios_csv(self):
+        """Exporta precios en pesos y otras monedas a un archivo CSV."""
+
+        productos = self.srv_prod.listar_todos()
+        cotizaciones = self.srv_cot.listar_todos()
+
+        ruta_salida = Path(
+            "/content/price_manager/src/"
+            "price_manager/migrations/csv/precios_bimonetarios.csv"
+        )
+
+        monedas = self.srv_mon.listar_todos()
+
+        with open(
+            ruta_salida,
+            "w",
+            encoding="utf-8",
+            newline=""
+        ) as archivo_csv:
+
+            columnas = [
+                "producto_id",
+                "producto",
+                "precio_pesos",
+                "moneda",
+                "precio_convertido"
+            ]
+
+            escritor = csv.DictWriter(
+                archivo_csv,
+                fieldnames=columnas
+            )
+
+            escritor.writeheader()
+
+            for producto in productos:
+
+                for moneda in monedas:
+
+                    if moneda.codigo.upper() == "ARS":
+                        continue
+
+                    cotizacion = next(
+                        (
+                            c for c in reversed(cotizaciones)
+                            if c.tipo.nombre.lower()
+                            == moneda.nombre.lower()
+                        ),
+                        None
+                    )
+
+                    if not cotizacion:
+                        continue
+
+                    escritor.writerow(
+                        {
+                            "producto_id": producto.id,
+                            "producto": producto.nombre,
+                            "precio_pesos": producto.precio.valor,
+                            "moneda": moneda.codigo,
+                            "precio_convertido": (
+                                producto.precio.valor
+                                / cotizacion.valor
+                            )
+                        }
+                    )
+
+        print(
+            f"Archivo exportado correctamente: {ruta_salida}"
+        )
+

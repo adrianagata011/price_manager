@@ -61,3 +61,13 @@
 - Se implementó el método obtener_cotizaciones().
 - Se registraron cotizaciones automáticamente en SQLite.
 - Se verificó la descarga y persistencia de cotizaciones.
+
+
+## [2026-05-23 11:25] - Ejercicio 08
+
+### Nuevas opciones de menú
+- Se agregó la opción para obtener cotizaciones desde la API.
+- Se agregó la opción para visualizar precios bimonetarios.
+- Se agregó la opción para exportar precios bimonetarios a CSV.
+- Se actualizó la clase ConsoleUI con nuevos métodos de integración.
+- Se verificó la incorporación de las nuevas funcionalidades al menú.
