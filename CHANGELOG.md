@@ -71,3 +71,11 @@
 - Se agregó la opción para exportar precios bimonetarios a CSV.
 - Se actualizó la clase ConsoleUI con nuevos métodos de integración.
 - Se verificó la incorporación de las nuevas funcionalidades al menú.
+
+
+## [2026-05-23 12:10] - Ajustes finales Sprint_2
+
+### Documentación y validaciones finales
+- Se actualizó README.md para reflejar el contenido de Sprint_2.
+- Se reorganizaron los checks finales del notebook.
+- Se verificó el correcto funcionamiento integral del sistema.
