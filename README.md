@@ -34,6 +34,7 @@ exportar precios bimonetarios.
 
 El sistema mantiene una arquitectura organizada en capas:
 
+``` Text
 [ UI - Console ]
 ↓
 [ Servicios ]
@@ -43,6 +44,7 @@ El sistema mantiene una arquitectura organizada en capas:
 [ SQLite + SQLAlchemy ]
 ↑
 [ Entidades / ORM ]
+```
 
 ### Descripción de capas
 
@@ -90,6 +92,7 @@ El sistema mantiene una arquitectura organizada en capas:
 
 ## Estructura principal
 
+``` Text
 price_manager/
 ├── database/
 ├── entities/
@@ -101,6 +104,7 @@ price_manager/
 │   └── sql/
 ├── ui/
 └── main.py
+```
 
 ---
 
