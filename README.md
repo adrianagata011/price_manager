@@ -27,7 +27,8 @@ Desarrollar un sistema de gestión de inventario que permita administrar product
 - Manejo de stock con validaciones
 - Registro de cotizaciones con histórico
 
-Introducción y contexto
+## Introducción y contexto
+
 Este proyecto surge de la necesidad de una empresa de productos electrónicos de gestionar su inventario en un entorno económico cambiante. Se desarrollará una aplicación en Python basada en programación orientada a objetos que permitirá administrar productos, categorías, proveedores, precios y stock, considerando distintas monedas y cotizaciones del dólar.
 
 ---
@@ -103,6 +104,22 @@ price_manager/
   - No permitir precios negativos
   - No permitir stock negativo
   - Validar existencia de relaciones (producto, proveedor, etc.)
+
+---
+
+## Criterios de Calidad del Código
+
+Para cumplir con los requisitos de la cátedra y mejorar la mantenibilidad del proyecto, se adoptaron las siguientes pautas de desarrollo:
+
+- Uso de **type hints** en funciones y métodos para indicar claramente los tipos de datos esperados.
+- Incorporación de **docstrings** en clases y métodos principales para documentar su propósito.
+- Nombres de variables, clases y funciones descriptivos y coherentes con el dominio del sistema.
+- Separación de responsabilidades mediante una arquitectura por capas: entidades, repositorios, servicios e interfaz de usuario.
+- Validaciones de negocio centralizadas en la capa de servicios.
+- Comentarios aclaratorios en partes relevantes del código, evitando comentarios innecesarios o repetitivos.
+- Revisión del notebook y del proyecto para asegurar que no existan errores de ejecución.
+
+Estas decisiones buscan que el sistema sea más claro, ordenado y fácil de mantener.
 
 ---
 
