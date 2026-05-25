@@ -125,3 +125,5 @@ main(import_default_data=False)
 ## Sprint actual
 
 Sprint 2.
+
+Modificación realizada por Matias Diaz para revisión del Sprint 2.
