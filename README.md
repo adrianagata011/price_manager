@@ -127,3 +127,20 @@ main(import_default_data=False)
 Sprint 2.
 
 Modificación realizada por Matias Diaz para revisión del Sprint 2.
+
+## Sprint 3
+
+En el Sprint 3 se incorpora una extensión funcional del sistema Price Manager orientada a la comparación de precios internos contra precios publicados en una tienda web.
+
+Las principales funcionalidades previstas para este sprint son:
+
+- Carga de productos desde una base de datos SQL.
+- Implementación de un scraper con Scrapy.
+- Extracción de precios, imágenes, formas de pago y descripciones de productos.
+- Comparación entre precios internos y precios web.
+- Generación de alertas en formato CSV.
+- Generación de reportes en formato Excel.
+- Registro de auditoría de operaciones relevantes.
+- Incorporación de un menú de ejecución para centralizar las acciones principales del sistema.
+
+El desarrollo se realiza sobre la rama `Sprint_3`, creada a partir de la rama `Sprint_2`.
