@@ -3,6 +3,8 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any
 
+from sqlalchemy import text
+
 from price_manager.database.connection import ConexionDB
 from price_manager.models.models import (
     AlmacenModel,
@@ -217,3 +219,78 @@ def migrar_datos(
         )
 
       print(f"Migración completada: {nombre_archivo}")
+
+
+def cargar_datos_desde_sql(
+    carpeta_sqls: str,
+    reiniciar_base: bool = True
+) -> None:
+  """
+  Carga los datos iniciales desde archivos SQL.
+
+  Args:
+    carpeta_sqls:
+      Ruta donde están los archivos .sql.
+
+    reiniciar_base:
+      Indica si la base debe recrearse antes de cargar los datos.
+  """
+
+  conexion = ConexionDB()
+  carpeta_sqls_path = Path(carpeta_sqls)
+
+  if not carpeta_sqls_path.exists():
+    raise FileNotFoundError(
+        f"No se encontró la carpeta SQL: {carpeta_sqls_path}"
+    )
+
+  if reiniciar_base:
+    Base.metadata.drop_all(
+        conexion.engine
+    )
+
+    Base.metadata.create_all(
+        conexion.engine
+    )
+
+  orden_sql = [
+      "categorias.sql",
+      "proveedores.sql",
+      "almacenes.sql",
+      "monedas.sql",
+      "tipos_cotizacion.sql",
+      "productos.sql",
+      "stock.sql",
+      "cotizaciones.sql"
+  ]
+
+  with conexion.manejar_transaccion() as sesion:
+
+    for nombre_archivo in orden_sql:
+
+      archivo_sql = carpeta_sqls_path / nombre_archivo
+
+      if not archivo_sql.exists():
+        print(f"No se encontró el archivo {nombre_archivo}.")
+        continue
+
+      contenido_sql = archivo_sql.read_text(
+          encoding="utf-8"
+      ).strip()
+
+      if not contenido_sql:
+        print(f"El archivo {nombre_archivo} está vacío.")
+        continue
+
+      sentencias = [
+          sentencia.strip()
+          for sentencia in contenido_sql.split(";")
+          if sentencia.strip()
+      ]
+
+      for sentencia in sentencias:
+        sesion.execute(
+            text(sentencia)
+        )
+
+      print(f"Carga completada: {nombre_archivo}")

@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "nombre": "Intel i5 12400"
+  },
+  {
+    "id": 2,
+    "nombre": "AMD Ryzen 5 5600"
+  },
+  {
+    "id": 3,
+    "nombre": "Corsair 16GB DDR4"
+  },
+  {
+    "id": 4,
+    "nombre": "Kingston NVMe 1TB"
+  },
+  {
+    "id": 5,
+    "nombre": "NVIDIA RTX 4060"
+  },
+  {
+    "id": 6,
+    "nombre": "Corsair 750W"
+  },
+  {
+    "id": 7,
+    "nombre": "Gabinete ATX Gamer"
+  },
+  {
+    "id": 8,
+    "nombre": "Monitor LG 24"
+  },
+  {
+    "id": 9,
+    "nombre": "Teclado Redragon K552"
+  },
+  {
+    "id": 10,
+    "nombre": "Mouse Logitech G203"
+  }
+]

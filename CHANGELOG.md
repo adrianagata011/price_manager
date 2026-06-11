@@ -89,3 +89,19 @@
 - Se preparó la estructura inicial para trabajar con scraper, reportes, scripts SQL y logs.
 - Se agregaron archivos `.gitkeep` para conservar carpetas vacías en Git.
 - Se actualizaron `README.md` y `CHANGELOG.md` para dejar registrado el inicio del sprint.
+
+## [2026-06-11 12:58] - Carga SQL y scraper de precios web
+
+### Carga desde SQL
+- Se agregó la función `cargar_datos_desde_sql`.
+- Se probó la carga de datos usando los archivos SQL generados por el proyecto.
+- Se validó la cantidad de registros cargados en las tablas principales.
+
+### Scraper Star Computación
+- Se creó la estructura base del scraper.
+- Se implementaron item, loader, pipeline y spider.
+- Se generó una lista de productos internos para limitar las búsquedas.
+- Se realizó una prueba previa para identificar los selectores reales del sitio.
+- Se implementó la búsqueda de productos en Star Computación.
+- Se extrajeron precio, URL de imagen, formas de pago y descripción.
+- Se guardaron los resultados obtenidos en formato JSON dentro de `reports`.
