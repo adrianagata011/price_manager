@@ -79,3 +79,13 @@
 - Se actualizó README.md para reflejar el contenido de Sprint_2.
 - Se reorganizaron los checks finales del notebook.
 - Se verificó el correcto funcionamiento integral del sistema.
+
+# Sprint 3
+
+## [2026-06-11 11:42] - Inicio Sprint_3
+
+### Configuración inicial
+- Se creó la rama `Sprint_3` a partir de la rama `Sprint_2`.
+- Se preparó la estructura inicial para trabajar con scraper, reportes, scripts SQL y logs.
+- Se agregaron archivos `.gitkeep` para conservar carpetas vacías en Git.
+- Se actualizaron `README.md` y `CHANGELOG.md` para dejar registrado el inicio del sprint.
