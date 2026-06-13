@@ -134,3 +134,12 @@
 - Se aplicó la auditoría sobre los métodos públicos de los servicios.
 - Se aplicó la auditoría sobre las funciones de migración y carga desde SQL.
 - Se validó el registro de operaciones correctas y operaciones con error.
+
+## [2026-06-13 12:28] - Opciones nuevas en el menú
+
+### Menú de consola
+- Se agregó la opción para ejecutar scraping desde el menú.
+- Se agregó la opción para generar el reporte de precios.
+- Se agregó la opción para ver el historial de auditoría.
+- Se validó que `console.py` compile correctamente.
+- Se verificó la importación de `ConsoleUI` después de los cambios.

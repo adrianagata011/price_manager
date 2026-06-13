@@ -13,6 +13,13 @@ from price_manager.entities.entities import (
 import csv
 import datetime
 from pathlib import Path
+import json
+import os
+import re
+import subprocess
+from sqlalchemy import text
+from price_manager.database.connection import ConexionDB
+from price_manager.auditoria.auditoria import registrar_auditoria
 
 
 class ConsoleUI:
@@ -66,6 +73,9 @@ class ConsoleUI:
         print("31. Obtener cotizaciones por API")
         print("32. Ver lista de precios bimonetaria")
         print("33. Exportar precios bimonetarios a CSV")
+        print("34. Ejecutar scraping")
+        print("35. Generar reporte")
+        print("36. Ver historial de auditoría")
         print("0. Salir")
 
         return input("Seleccione una opción: ")
@@ -111,6 +121,9 @@ class ConsoleUI:
                 elif opcion == "31": self.obtener_cotizaciones_api()
                 elif opcion == "32": self.ver_lista_precios_bimonetaria()
                 elif opcion == "33": self.exportar_precios_bimonetarios_csv()
+                elif opcion == "34": self.ejecutar_scraping()
+                elif opcion == "35": self.generar_reporte()
+                elif opcion == "36": self.ver_historial_auditoria()
                 elif opcion == "0":
                     print("Saliendo...")
                     break
@@ -440,5 +453,254 @@ class ConsoleUI:
 
         print(
             f"Archivo exportado correctamente: {ruta_salida}"
+        )
+
+
+    # =========================================
+    # FUNCIONALIDADES SPRINT 3
+    # =========================================
+    def _ruta_repositorio(self):
+        """Obtiene la ruta raíz del repositorio."""
+
+        return Path(__file__).resolve().parents[3]
+
+    def _convertir_precio_web(self, precio_texto):
+        """Convierte un precio web en formato texto a número."""
+
+        precio_limpio = re.sub(
+            r"[^0-9,\.]",
+            "",
+            str(precio_texto or "")
+        )
+
+        if not precio_limpio:
+            return None
+
+        precio_limpio = precio_limpio.replace(".", "")
+        precio_limpio = precio_limpio.replace(",", ".")
+
+        return float(precio_limpio)
+
+
+    def ejecutar_scraping(self):
+        """Ejecuta el scraper de Star Computación."""
+
+        ruta_repo = self._ruta_repositorio()
+        ruta_src = ruta_repo / "src"
+
+        ruta_spider = (
+            ruta_src
+            / "price_manager"
+            / "scraper"
+            / "spiders"
+            / "star_computacion_spider.py"
+        )
+
+        ruta_productos = (
+            ruta_src
+            / "price_manager"
+            / "scraper"
+            / "productos_busqueda.json"
+        )
+
+        if not ruta_spider.exists():
+            raise FileNotFoundError(
+                f"No se encontró el spider: {ruta_spider}"
+            )
+
+        if not ruta_productos.exists():
+            raise FileNotFoundError(
+                f"No se encontró el archivo de productos: {ruta_productos}"
+            )
+
+        env = os.environ.copy()
+        env["PYTHONPATH"] = str(ruta_src)
+
+        comando = [
+            "scrapy",
+            "runspider",
+            str(ruta_spider),
+            "-a",
+            f"productos_path={ruta_productos}"
+        ]
+
+        resultado = subprocess.run(
+            comando,
+            cwd=str(ruta_repo),
+            env=env,
+            capture_output=True,
+            text=True,
+            check=False
+        )
+
+        if resultado.returncode != 0:
+            registrar_auditoria(
+                "MENU_EJECUTAR_SCRAPING_ERROR",
+                (resultado.stderr or "Error al ejecutar scraping.")[-500:]
+            )
+
+            raise RuntimeError(
+                "No se pudo ejecutar el scraper."
+            )
+
+        registrar_auditoria(
+            "MENU_EJECUTAR_SCRAPING",
+            "Scraping ejecutado desde el menú de consola."
+        )
+
+        print("Scraping ejecutado correctamente.")
+        print(
+            "Archivo generado:",
+            ruta_repo / "reports" / "star_computacion_resultados.json"
+        )
+
+
+    def generar_reporte(self):
+        """Genera el reporte Excel de comparación de precios."""
+
+        from openpyxl import Workbook
+
+        ruta_repo = self._ruta_repositorio()
+
+        ruta_resultados = (
+            ruta_repo
+            / "reports"
+            / "star_computacion_resultados.json"
+        )
+
+        ruta_reporte = (
+            ruta_repo
+            / "reports"
+            / "reporte_precios.xlsx"
+        )
+
+        if not ruta_resultados.exists():
+            raise FileNotFoundError(
+                "No se encontró el archivo de resultados del scraper."
+            )
+
+        resultados_web = json.loads(
+            ruta_resultados.read_text(encoding="utf-8")
+        )
+
+        conexion = ConexionDB()
+
+        with conexion.manejar_transaccion() as sesion:
+            productos_db = sesion.execute(
+                text(
+                    """
+                    SELECT nombre, precio
+                    FROM productos
+                    ORDER BY id
+                    """
+                )
+            ).fetchall()
+
+        productos_internos = {
+            producto.nombre: float(producto.precio)
+            for producto in productos_db
+        }
+
+        fecha_extraccion = datetime.datetime.now().strftime(
+            "%Y-%m-%d %H:%M:%S"
+        )
+
+        filas = []
+
+        for resultado in resultados_web:
+            producto_buscado = resultado.get("producto_buscado")
+
+            if producto_buscado not in productos_internos:
+                continue
+
+            precio_interno = productos_internos[producto_buscado]
+
+            precio_web = self._convertir_precio_web(
+                resultado.get("precio")
+            )
+
+            if precio_web is None:
+                continue
+
+            filas.append(
+                [
+                    producto_buscado,
+                    resultado.get("nombre"),
+                    precio_interno,
+                    precio_web,
+                    precio_web - precio_interno,
+                    fecha_extraccion
+                ]
+            )
+
+        ruta_reporte.parent.mkdir(
+            parents=True,
+            exist_ok=True
+        )
+
+        workbook = Workbook()
+        hoja = workbook.active
+        hoja.title = "Reporte precios"
+
+        hoja.append(
+            [
+                "Producto",
+                "Producto web encontrado",
+                "Precio interno",
+                "Precio web",
+                "Diferencia",
+                "Fecha de extracción"
+            ]
+        )
+
+        for fila in filas:
+            hoja.append(fila)
+
+        workbook.save(
+            ruta_reporte
+        )
+
+        registrar_auditoria(
+            "MENU_GENERAR_REPORTE",
+            f"Reporte generado desde menú. Filas: {len(filas)}."
+        )
+
+        print("Reporte generado correctamente.")
+        print("Archivo:", ruta_reporte)
+
+
+    def ver_historial_auditoria(self):
+        """Muestra los últimos registros de auditoría."""
+
+        conexion = ConexionDB()
+
+        with conexion.manejar_transaccion() as sesion:
+            registros = sesion.execute(
+                text(
+                    """
+                    SELECT id, accion, fecha, detalles
+                    FROM auditorias
+                    ORDER BY id DESC
+                    LIMIT 20
+                    """
+                )
+            ).fetchall()
+
+        if not registros:
+            print("No hay registros de auditoría.")
+            return
+
+        print("\n=== HISTORIAL DE AUDITORÍA ===")
+
+        for registro in registros:
+            print("-" * 80)
+            print("ID:", registro.id)
+            print("Acción:", registro.accion)
+            print("Fecha:", registro.fecha)
+            print("Detalles:", registro.detalles)
+
+        registrar_auditoria(
+            "MENU_VER_HISTORIAL_AUDITORIA",
+            "Historial de auditoría consultado desde menú."
         )
 
