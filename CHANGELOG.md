@@ -115,3 +115,12 @@
 - Se calcula la diferencia de precio en importe y porcentaje.
 - Se genera un archivo CSV con las alertas detectadas.
 - Se deja disponible el archivo `reports/alertas_precios.csv` para descarga y análisis.
+
+## [2026-06-13 03:33] - Reporte Excel de precios
+
+### Reporte de precios
+- Se generó un reporte Excel con la comparación entre precios internos y precios web.
+- Se incluyeron los campos producto, precio interno, precio web, diferencia y fecha de extracción.
+- Se agregó el producto web encontrado para facilitar el análisis de cada comparación.
+- Se guardó el archivo `reports/reporte_precios.xlsx`.
+- Se dejó disponible el reporte para descarga desde Colab.
