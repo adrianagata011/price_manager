@@ -124,3 +124,13 @@
 - Se agregó el producto web encontrado para facilitar el análisis de cada comparación.
 - Se guardó el archivo `reports/reporte_precios.xlsx`.
 - Se dejó disponible el reporte para descarga desde Colab.
+
+## [2026-06-13 12:02] - Auditoría del sistema
+
+### Auditoría
+- Se agregó el modelo `AuditoriaModel`.
+- Se creó la tabla `auditorias` con acción, fecha y detalles.
+- Se implementó el decorador `@auditar_operacion`.
+- Se aplicó la auditoría sobre los métodos públicos de los servicios.
+- Se aplicó la auditoría sobre las funciones de migración y carga desde SQL.
+- Se validó el registro de operaciones correctas y operaciones con error.

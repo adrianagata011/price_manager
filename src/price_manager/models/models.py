@@ -138,3 +138,18 @@ class CotizacionModel(Base):
   tipo: Mapped["TipoCotizacionModel"] = relationship(
       back_populates="cotizaciones"
   )
+
+
+class AuditoriaModel(Base):
+  """Representa una auditoría de operación del sistema."""
+
+  __tablename__ = "auditorias"
+
+  id: Mapped[int] = mapped_column(
+      Integer,
+      primary_key=True,
+      autoincrement=True
+  )
+  accion: Mapped[str] = mapped_column(String(100), nullable=False)
+  fecha: Mapped[datetime] = mapped_column(DateTime, nullable=False)
+  detalles: Mapped[str] = mapped_column(String(500), nullable=False)

@@ -17,6 +17,7 @@ from price_manager.models.models import (
     StockModel,
     TipoCotizacionModel
 )
+from price_manager.auditoria.auditoria import auditar_operacion
 
 
 def _valor_sql(valor: Any) -> str:
@@ -51,6 +52,7 @@ def _generar_insert(
   )
 
 
+@auditar_operacion("MIGRAR_DATOS_CSV_SQL")
 def migrar_datos(
     carpeta_csvs: str,
     carpeta_sqls: str
@@ -221,6 +223,7 @@ def migrar_datos(
       print(f"Migración completada: {nombre_archivo}")
 
 
+@auditar_operacion("CARGA_DATOS_SQL")
 def cargar_datos_desde_sql(
     carpeta_sqls: str,
     reiniciar_base: bool = True

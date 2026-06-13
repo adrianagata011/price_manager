@@ -31,6 +31,7 @@ from price_manager.repositories.repositories import (
     RepositorioProducto,
     RepositorioStock
 )
+from price_manager.auditoria.auditoria import auditar_operacion
 
 
 
@@ -47,18 +48,23 @@ class ServicioCategoria:
     def __init__(self, repo: RepositorioCategoria):
         self._repo = repo
 
+    @auditar_operacion("ServicioCategoria.crear")
     def crear(self, c: Categoria):
         return self._repo.crear(c)
 
+    @auditar_operacion("ServicioCategoria.obtener")
     def obtener(self, id: int):
         return self._repo.leer_por_id(id)
 
+    @auditar_operacion("ServicioCategoria.listar_todos")
     def listar_todos(self):
         return self._repo.leer_todos()
 
+    @auditar_operacion("ServicioCategoria.actualizar")
     def actualizar(self, c: Categoria):
         return self._repo.actualizar(c)
 
+    @auditar_operacion("ServicioCategoria.eliminar")
     def eliminar(self, id: int):
         return self._repo.eliminar(id)
 
@@ -70,18 +76,23 @@ class ServicioProveedor:
     def __init__(self, repo: RepositorioProveedor):
         self._repo = repo
 
+    @auditar_operacion("ServicioProveedor.crear")
     def crear(self, p: Proveedor):
         return self._repo.crear(p)
 
+    @auditar_operacion("ServicioProveedor.obtener")
     def obtener(self, id: int):
         return self._repo.leer_por_id(id)
 
+    @auditar_operacion("ServicioProveedor.listar_todos")
     def listar_todos(self):
         return self._repo.leer_todos()
 
+    @auditar_operacion("ServicioProveedor.actualizar")
     def actualizar(self, p: Proveedor):
         return self._repo.actualizar(p)
 
+    @auditar_operacion("ServicioProveedor.eliminar")
     def eliminar(self, id: int):
         return self._repo.eliminar(id)
 
@@ -93,18 +104,23 @@ class ServicioAlmacen:
     def __init__(self, repo: RepositorioAlmacen):
         self._repo = repo
 
+    @auditar_operacion("ServicioAlmacen.crear")
     def crear(self, a: Almacen):
         return self._repo.crear(a)
 
+    @auditar_operacion("ServicioAlmacen.obtener")
     def obtener(self, id: int):
         return self._repo.leer_por_id(id)
 
+    @auditar_operacion("ServicioAlmacen.listar_todos")
     def listar_todos(self):
         return self._repo.leer_todos()
 
+    @auditar_operacion("ServicioAlmacen.actualizar")
     def actualizar(self, a: Almacen):
         return self._repo.actualizar(a)
 
+    @auditar_operacion("ServicioAlmacen.eliminar")
     def eliminar(self, id: int):
         return self._repo.eliminar(id)
 
@@ -116,18 +132,23 @@ class ServicioMoneda:
     def __init__(self, repo: RepositorioMoneda):
         self._repo = repo
 
+    @auditar_operacion("ServicioMoneda.crear")
     def crear(self, m: Moneda):
         return self._repo.crear(m)
 
+    @auditar_operacion("ServicioMoneda.obtener")
     def obtener(self, id: int):
         return self._repo.leer_por_id(id)
 
+    @auditar_operacion("ServicioMoneda.listar_todos")
     def listar_todos(self):
         return self._repo.leer_todos()
 
+    @auditar_operacion("ServicioMoneda.actualizar")
     def actualizar(self, m: Moneda):
         return self._repo.actualizar(m)
 
+    @auditar_operacion("ServicioMoneda.eliminar")
     def eliminar(self, id: int):
         return self._repo.eliminar(id)
 
@@ -139,18 +160,23 @@ class ServicioTipoCotizacion:
     def __init__(self, repo: RepositorioTipoCotizacion):
         self._repo = repo
 
+    @auditar_operacion("ServicioTipoCotizacion.crear")
     def crear(self, t: TipoCotizacion):
         return self._repo.crear(t)
 
+    @auditar_operacion("ServicioTipoCotizacion.obtener")
     def obtener(self, id: int):
         return self._repo.leer_por_id(id)
 
+    @auditar_operacion("ServicioTipoCotizacion.listar_todos")
     def listar_todos(self):
         return self._repo.leer_todos()
 
+    @auditar_operacion("ServicioTipoCotizacion.actualizar")
     def actualizar(self, t: TipoCotizacion):
         return self._repo.actualizar(t)
 
+    @auditar_operacion("ServicioTipoCotizacion.eliminar")
     def eliminar(self, id: int):
         return self._repo.eliminar(id)
 
@@ -166,6 +192,7 @@ class ServicioProducto:
         self._srv_cat = srv_cat
         self._srv_prov = srv_prov
 
+    @auditar_operacion("ServicioProducto.crear")
     def crear(self, p: Producto):
         categoria = self._srv_cat.obtener(p.categoria.id)
         if not categoria:
@@ -177,15 +204,18 @@ class ServicioProducto:
 
         return self._repo.crear(p)
 
+    @auditar_operacion("ServicioProducto.obtener")
     def obtener(self, id: int):
         res = self._repo.leer_por_id(id)
         if not res:
             raise ValueError(f"Producto con ID {id} no existe.")
         return res
 
+    @auditar_operacion("ServicioProducto.listar_todos")
     def listar_todos(self):
         return self._repo.leer_todos()
 
+    @auditar_operacion("ServicioProducto.actualizar")
     def actualizar(self, p: Producto):
         categoria = self._srv_cat.obtener(p.categoria.id)
         if not categoria:
@@ -197,6 +227,7 @@ class ServicioProducto:
 
         return self._repo.actualizar(p)
 
+    @auditar_operacion("ServicioProducto.eliminar")
     def eliminar(self, id: int):
         return self._repo.eliminar(id)
 
@@ -212,6 +243,7 @@ class ServicioStock:
         self._srv_prod = srv_prod
         self._srv_alm = srv_alm
 
+    @auditar_operacion("ServicioStock.crear")
     def crear(self, s: Stock):
         # Se valida que producto y almacén existan
         producto = self._srv_prod.obtener(s.producto.id)
@@ -224,12 +256,15 @@ class ServicioStock:
 
         return self._repo.crear(s)
 
+    @auditar_operacion("ServicioStock.obtener")
     def obtener(self, producto_id: int, almacen_id: int):
         return self._repo.leer_por_producto_y_almacen(producto_id, almacen_id)
 
+    @auditar_operacion("ServicioStock.listar_todos")
     def listar_todos(self):
         return self._repo.leer_todos()
 
+    @auditar_operacion("ServicioStock.actualizar")
     def actualizar(self, s: Stock):
         producto = self._srv_prod.obtener(s.producto.id)
         almacen = self._srv_alm.obtener(s.almacen.id)
@@ -241,9 +276,11 @@ class ServicioStock:
 
         return self._repo.actualizar(s)
 
+    @auditar_operacion("ServicioStock.eliminar")
     def eliminar(self, producto_id: int, almacen_id: int):
         return self._repo.eliminar(producto_id, almacen_id)
 
+    @auditar_operacion("ServicioStock.registrar_movimiento")
     def registrar_movimiento(self, producto_id: int, cantidad: int, almacen_id: int):
         # Se obtiene el producto real desde el servicio
         producto = self._srv_prod.obtener(producto_id)
@@ -270,6 +307,7 @@ class ServicioStock:
             except ValueError:
                 return self._repo.crear(nuevo_stock)
 
+    @auditar_operacion("ServicioStock.obtener_stock")
     def obtener_stock(self, producto_id: int, almacen_id: int):
         return self._repo.leer_por_producto_y_almacen(producto_id, almacen_id)
 
@@ -284,6 +322,7 @@ class ServicioCotizacionDolar:
         self._repo = repo
         self._srv_tipo = srv_tipo
 
+    @auditar_operacion("ServicioCotizacionDolar.crear")
     def crear(self, c: CotizacionDolar):
         tipo = self._srv_tipo.obtener(c.tipo.id)
         if not tipo:
@@ -291,15 +330,18 @@ class ServicioCotizacionDolar:
 
         return self._repo.crear(c)
 
+    @auditar_operacion("ServicioCotizacionDolar.obtener")
     def obtener(self, id: int):
         res = self._repo.leer_por_id(id)
         if not res:
             raise ValueError(f"La cotización con ID {id} no existe.")
         return res
 
+    @auditar_operacion("ServicioCotizacionDolar.listar_todos")
     def listar_todos(self):
         return self._repo.leer_todos()
 
+    @auditar_operacion("ServicioCotizacionDolar.actualizar")
     def actualizar(self, c: CotizacionDolar):
         tipo = self._srv_tipo.obtener(c.tipo.id)
         if not tipo:
@@ -307,12 +349,15 @@ class ServicioCotizacionDolar:
 
         return self._repo.actualizar(c)
 
+    @auditar_operacion("ServicioCotizacionDolar.eliminar")
     def eliminar(self, id: int):
         return self._repo.eliminar(id)
 
+    @auditar_operacion("ServicioCotizacionDolar.registrar_cotizacion")
     def registrar_cotizacion(self, c: CotizacionDolar):
         return self.crear(c)
 
+    @auditar_operacion("ServicioCotizacionDolar.obtener_historico")
     def obtener_historico(self, tipo_id: int):
         tipo = self._srv_tipo.obtener(tipo_id)
         if not tipo:
@@ -320,6 +365,7 @@ class ServicioCotizacionDolar:
 
         return self._repo.leer_historico_por_tipo(tipo_id)
 
+    @auditar_operacion("ServicioCotizacionDolar.obtener_cotizaciones")
     def obtener_cotizaciones(self):
         """
         Consulta la API del dólar y registra
