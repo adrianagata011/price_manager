@@ -1,0 +1,6 @@
+producto_interno_id,producto_interno,producto_web,precio_interno,precio_web,diferencia_importe,diferencia_porcentaje,diferencia_maxima_ingresada,tipo_alerta,url_producto
+9,Teclado Redragon K552,Teclado Gamer Redragon K552 Kumara RGB Black Switch Blue,70000.0,114945.0,44945.0,64.21,10.0,PRECIO_WEB_MAYOR,https://www.starcomputacion.com.ar/prod/teclado-gamer-redragon-k552-kumara-rgb-black-switch-blue-7096/
+9,Teclado Redragon K552,Teclado Gamer Redragon K552 Kumara RGB Black Switch Red,70000.0,114945.0,44945.0,64.21,10.0,PRECIO_WEB_MAYOR,https://www.starcomputacion.com.ar/prod/teclado-gamer-redragon-k552-kumara-rgb-black-switch-red-7097/
+9,Teclado Redragon K552,Kit Redragon K552-BB-SP Essentials (Teclado + Mouse + Pad +Auriculares),70000.0,165549.0,95549.0,136.5,10.0,PRECIO_WEB_MAYOR,https://www.starcomputacion.com.ar/prod/kit-redragon-k552-bb-sp-essentials-teclado-mouse-pad-auriculares-7089/
+10,Mouse Logitech G203,"Mouse Logitech G203 Prodigy (Gamer, Blanco)",45000.0,33319.0,-11681.0,-25.96,10.0,PRECIO_WEB_MENOR,https://www.starcomputacion.com.ar/prod/mouse-logitech-g203-prodigy-gamer-blanco-6804/
+10,Mouse Logitech G203,"Mouse Logitech G203 Prodigy (Gamer, Azul)",45000.0,33465.0,-11535.0,-25.63,10.0,PRECIO_WEB_MENOR,https://www.starcomputacion.com.ar/prod/mouse-logitech-g203-prodigy-gamer-azul-6950/

@@ -105,3 +105,13 @@
 - Se implementó la búsqueda de productos en Star Computación.
 - Se extrajeron precio, URL de imagen, formas de pago y descripción.
 - Se guardaron los resultados obtenidos en formato JSON dentro de `reports`.
+
+## [2026-06-13 03:15] - Comparación de precios y alertas
+
+### Alertas de precios
+- Se agregó el ingreso manual del porcentaje máximo de diferencia aceptada.
+- Se ejecuta nuevamente el scraper antes de comparar precios.
+- Se comparan los precios internos contra los precios obtenidos desde Star Computación.
+- Se calcula la diferencia de precio en importe y porcentaje.
+- Se genera un archivo CSV con las alertas detectadas.
+- Se deja disponible el archivo `reports/alertas_precios.csv` para descarga y análisis.
